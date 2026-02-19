@@ -1,34 +1,49 @@
-def BFS(graph , start):
+# پیمایش عرضی (BFS)
+def traverse_bfs(graph, start):
     queue = [start]
     visited = {start}
-    while queue:
-        vertex = queue.pop(0)
-        for ne in graph[vertex]:
-            visited.add(ne)
-            queue.append(ne)
 
+    while queue:
+        v = queue.pop(0)
+        for neigh in graph.get(v, []):
+            if neigh not in visited:
+                visited.add(neigh)
+                queue.append(neigh)
 
     return visited
 
-def DFS(graph , start , visited):
-    visited[start] = True
-    for ne in graph[start]:
-        if not visited[ne]:
-            DFS(graph , ne , visited)
 
-def sort1(A):
-    B = [] *len(A)
-    for i in range(len(A)):
-        for j in range(1 , len(A)):
-            if A[j] < min:
-                min = A[j]
-                k = j
-        B[i] = min
-        A[k] = float("inf")
-    return B 
+# پیمایش عمقی (DFS) - بازگشتی
+def traverse_dfs(graph, start, visited):
+    visited.add(start)
+    for neigh in graph.get(start, []):
+        if neigh not in visited:
+            traverse_dfs(graph, neigh, visited)
 
-def Bubble(A):
-    for i in range(len(A)-1):
-        for j in range(len(A)-1):
-            if A[j] > A[j+1]:
-                A[j], A[j+1] = A[j+1] , A[j]                       
+
+# ------------------ مرتب‌سازی ------------------
+
+# مرتب‌سازی انتخابی (Selection Sort) - برمی‌گرداند لیست مرتب شده (کپی)
+def selection_sort_simple(arr):
+    a = arr[:]              # کپی تا لیست اصلی خراب نشود
+    out = [0] * len(a)
+
+    for i in range(len(a)):
+        mn = float("inf")
+        idx = -1
+        for j in range(len(a)):
+            if a[j] < mn:
+                mn = a[j]
+                idx = j
+        out[i] = mn
+        a[idx] = float("inf")
+
+    return out
+
+
+# مرتب‌سازی حبابی (Bubble Sort) - درجا مرتب می‌کند
+def bubble_sort_inplace(arr):
+    for i in range(len(arr) - 1):
+        for j in range(len(arr) - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
