@@ -1,23 +1,20 @@
-"تکه برنامه ای بنویسید که دارای تابع پیچیدگی زمانی زیر باشد"
-F(n) = 3n**2 + 4n-8 ____ 4(n-2)
-    for i in range(n):
-        for i in range(n):
-            print(i)
-            print(j)
-            print(i+j)
-    for i in range(n-2)
-        a=b 
-        b=c 
-        c=d 
-        d=e
+def demo_loops_and_shift(size):
+    # ---- بخش اول: دو حلقه تو در تو ----
+    for row in range(size):
+        for col in range(size):
+            print(row)
+            print(col)
+            print(row + col)
 
+    # ---- بخش دوم: یک حلقه با چند انتساب ----
+    # مقداردهی اولیه (برای اینکه ارور نگیریم)
+    x1, x2, x3, x4, x5 = 1, 2, 3, 4, 5
 
+    for step in range(size - 2):
+        x1 = x2
+        x2 = x3
+        x3 = x4
+        x4 = x5
+        # x5 اگر قرار است عوض شود باید مشخص کنی (فعلاً ثابت می‌ماند)
 
-#for i in range(n):
-#    for i in range(n):
-#        p=k 
-#    t=s 
-
-#F(n) = n**2 + n        
-
-# n**2 به معنای (n) به توان دو
+    return x1, x2, x3, x4, x5
