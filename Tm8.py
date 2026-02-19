@@ -1,78 +1,81 @@
-class stack : 
-    def __init__(self , limit = 1000):
-        self.st=[]
-        self.lim = limit
-    def push(self , x):
-        if len(self.st) >= self.lim:
-           print("stack is full")
-           return -1
-        self.st.append(x)
+class Stack:
+    def __init__(self, limit=1000):
+        self.data = []
+        self.limit = limit
+
+    def is_empty(self):
+        return len(self.data) == 0
+
+    def is_full(self):
+        return len(self.data) >= self.limit
+
+    def push(self, x):
+        if self.is_full():
+            print("Stack is full")
+            return -1
+        self.data.append(x)
+
     def pop(self):
-        if len(self.st) == 0 :
-            print("stack is empty")
+        if self.is_empty():
+            print("Stack is empty")
             return -1
-        return self.st.pop()
+        return self.data.pop()
+
     def peek(self):
-        if len(self.st) == 0 :
-            print("stack is empty")
+        if self.is_empty():
+            print("Stack is empty")
             return -1
-        return self.st[-1]
-         
+        return self.data[-1]
 
 
-
-
-
-test = stack(10)
-test.push(57)
-test.push(126)
-test.push(-10)
-k=test.peek()
-
-
-
-
-#"ایندکس(x) های درون پشته را برگرداند."
-def find(self,x):
+# همه اندیس‌های x را چاپ کند
+def print_all_indexes(self, x):
+    found = False
     for i in range(len(self.st)):
-        if self.st[i] == x :
-           print(i)
+        if self.st[i] == x:
+            print(i)
+            found = True
+    if not found:
+        print("not found")
 
 
-#"اولین شامل  (x) را برگرداند"
-def find1(self,x):
+# اولین اندیس شامل x را چاپ کند
+def print_first_index(self, x):
     for i in range(len(self.st)):
-        if self.st[i] == x :
-           print(i)
-           return
-
-
-"اخرین ایندکس شامل (x) را چاپ کند"
-def find2(self,x):
-    for i in range(len(self.st)-1,-1,-1) :
-        if self.st[i] == x :
+        if self.st[i] == x:
             print(i)
             return
-def find2_n(self,x):
+    print("not found")
+
+
+# آخرین اندیس شامل x را چاپ کند (از آخر به اول)
+def print_last_index(self, x):
+    for i in range(len(self.st) - 1, -1, -1):
+        if self.st[i] == x:
+            print(i)
+            return
+    print("not found")
+
+
+# آخرین اندیس شامل x را چاپ کند (روش دوم: از اول به آخر)
+def print_last_index_v2(self, x):
+    p = -1
     for i in range(len(self.st)):
-        if self.st[i] == x :
-            p=i
-    print(p)                
+        if self.st[i] == x:
+            p = i
+    if p == -1:
+        print("not found")
+    else:
+        print(p)
 
 
-
-def find2_n(self,x):
-    list=[]
+# جایگزینی: همه‌ی x ها را با y عوض کند
+def replace_all(self, x, y):
     for i in range(len(self.st)):
-        if self.st[i] == x :
-            list.append(i)
-    print(list[2])
+        if self.st[i] == x:
+            self.st[i] = y
 
 
 
 
-def replace(self,x,y):
-    for i in range(len(self.st)):
-        if self.st[i] == x :
-            self.st[i]=y
-                                
+
