@@ -1,82 +1,99 @@
-class C_Queue:
-    def __init__(self, max = 100):
-        self.list = [] * max
+class CircularQueue:
+    def __init__(self, max_size=100):
+        self.data = [None] * max_size
         self.front = -1
         self.rear = -1
-    def  insert(self , x):
-        if (self.rear +1) % len(self.list) == self.front:
+
+    def is_empty(self):
+        return self.front == -1
+
+    def is_full(self):
+        return (self.rear + 1) % len(self.data) == self.front
+
+    def insert(self, x):
+        if self.is_full():
             print("Queue is full")
             return
-        if  self.front == -1:
+
+        if self.is_empty():
             self.front = 0
             self.rear = 0
-            self.list[0] = x
+            self.data[0] = x
             return
-        self.rear=(self.rear +1) % len(self.list)
-        self.list[self.rear] = x
+
+        self.rear = (self.rear + 1) % len(self.data)
+        self.data[self.rear] = x
+
     def delete(self):
-        if self.front == -1:
+        if self.is_empty():
             print("Queue is empty")
-            return
-        if self.front == self.rear:
-            k = self.list[self.front]
+            return None
+
+        k = self.data[self.front]
+
+        if self.front == self.rear:   # فقط یک عنصر داشت
             self.front = -1
             self.rear = -1
             return k
-        k = self.list[self.front]
-        self.front = (self.front +1) % len (self.list)
+
+        self.front = (self.front + 1) % len(self.data)
         return k
-    def is_empty(self):
-        return self.front == -1
-    
-    def is_full(self):
-        return (self.rear +1) % len (self.list) == self.front
-    
+
+    # نمایش عناصر معتبر (داخل صف)
     def show_valid(self):
-        if self.rear >= self.front:
-            for i in range(self.front , self.rear+1 , 1):
-                print(self.list[i])
-        else:
-            for i in range(self.front , len(self.list) , 1):
-                print(self.list[i])
-            for i in range(self.rear +1):
-                print(self.list[i])
+        if self.is_empty():
+            print("Queue is empty")
+            return
 
+        i = self.front
+        while True:
+            print(self.data[i])
+            if i == self.rear:
+                break
+            i = (i + 1) % len(self.data)
+
+    # نمایش خانه‌های نامعتبر (بیرون صف)
     def show_invalid(self):
-        if self.front == -1:
-            for i in range(len(self.list)):
-                print(self[i])
-                return
-            i = (self.rear+1) % len (self.list)
-            while i != self.front:
-                print(self.list[i])
-                i = (i +1) % len (self.list)
-
-    def Find(self , x):
-        if self.is_empty():
+        if len(self.data) == 0:
             return
+
+        if self.is_empty():
+            for i in range(len(self.data)):
+                print(self.data[i])
+            return
+
+        i = (self.rear + 1) % len(self.data)
+        while i != self.front:
+            print(self.data[i])
+            i = (i + 1) % len(self.data)
+
+    # پیدا کردن اندیس یک مقدار در صف (اگر نبود None)
+    def find(self, x):
+        if self.is_empty():
+            return None
+
         i = self.front
-        if self.list[i] == x:
-            return i
-        while i != self.rear:
-            i = (i +1) % len(self.list)
-            if self.list[i] == x:
+        while True:
+            if self.data[i] == x:
                 return i
-            
-    def raplace(self , x , y):
+            if i == self.rear:
+                break
+            i = (i + 1) % len(self.data)
+
+        return None
+
+    # جایگزینی همه‌ی x ها با y
+    def replace(self, x, y):
         if self.is_empty():
             return
+
         i = self.front
-        if self.list[i] == x:
-            self.list[i] = y
-        while i != self.rear:
-            i = (i +1) % len (self.list)
-            if self.list[i] == x:
-                self.list[i] = y                   
-           
-
-
-
+        while True:
+            if self.data[i] == x:
+                self.data[i] = y
+            if i == self.rear:
+                break
+            i = (i + 1) % len(self.data)
 
 
 
