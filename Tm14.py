@@ -1,14 +1,13 @@
 "کوییز"
-for i in range(n):
-    for j in range(i,n,1):
-        k=p 
-        print(k)
-        print(p)
+def example_nested(n):
+    for i in range(n):
+        for j in range(i, n):
+            k = 0      # فرض می‌کنیم p قبلاً مقدار دارد
+            print(k)
+            print(k)
 
-n+(n-1)+(n-2)+...+1
-1 + 2 + 3 + ...+ n 
-(n+1)+(n+1)+(n+1)+...+(n+1)
-= n (n+1) / 2
+n+F(n) = 3 × n(n+1) / 2
 
-F(n) = 3/2(n)(n+1)
-     = 1.5 n**2 + 1.5 n 
+F(n) = (3/2)n(n+1)
+
+F(n) = 1.5n² + 1.5n
