@@ -1,45 +1,59 @@
-class dnode():
-    def __init__(self , x):
-        self.Data = x
+class DNode:
+    def __init__(self, value):
+        self.value = value
         self.next = None
-        self.back = None
+        self.prev = None
 
 
-class dlinked_list :
+class DoublyLinkedList:
     def __init__(self):
         self.head = None
-    def del_after(self , x):
+
+    # حذف نود بعد از اولین نودی که value == x
+    def remove_after(self, x):
         if self.head is None:
-            print("error")
+            print("error: empty list")
             return
-        c = self.head
-        while c:
-            if c.Data == x:
-                if c.next :
-                    a = c.next
-                    c.next = a.next
-                    if a.next:
-                        a.next.back = c
-                    del a
+
+        cur = self.head
+        while cur:
+            if cur.value == x:
+                if cur.next is None:
+                    print("error: no node after x")
                     return
-                print("error 1")
+
+                target = cur.next
+                cur.next = target.next
+                if target.next:
+                    target.next.prev = cur
                 return
-            c = c.next
-            print("not found")
-    def del_x(self , x):
+
+            cur = cur.next
+
+        print("not found")
+
+    # حذف اولین نودی که value == x
+    def remove_value(self, x):
         if self.head is None:
-            print("error")
+            print("error: empty list")
             return
-        c = self.head
-        while c:
-            if c.Data == x:
-                if c.next is None:
-                    self.del_last()
+
+        cur = self.head
+        while cur:
+            if cur.value == x:
+                # اگر نود سر لیست بود
+                if cur.prev is None:
+                    self.head = cur.next
+                    if self.head:
+                        self.head.prev = None
                     return
-                c.back.next = c.next
-                c.next.back = c.back
-                del c
+
+                # اگر نود وسط یا آخر بود
+                cur.prev.next = cur.next
+                if cur.next:
+                    cur.next.prev = cur.prev
                 return
-            c = c.next
-            print("not found")
-            
+
+            cur = cur.next
+
+        print("not found")
